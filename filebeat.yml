@@ -1,0 +1,29 @@
+#=========================== Filebeat inputs =============================
+filebeat.inputs:
+- type: docker
+  enabled: true
+  containers.ids: '*'
+  json.message_key: log
+  json.keys_under_root: true
+  json.ignore_decoding_error: true
+  processors:
+  - add_docker_metadata: ~
+  - decode_json_fields:
+      fields: ["message"]
+
+
+#----------------------------- Logstash output --------------------------------
+output.logstash:
+  hosts: ["<inserthostname>:5901"]
+
+#================================ Logging =====================================
+
+# Sets log level. The default log level is info.
+# Available log levels are: error, warning, info, debug
+logging.level: error
+logging.json: true
+
+# At debug level, you can selectively enable logging only for some components.
+# To enable all selectors use ["*"]. Examples of other selectors are "beat",
+# "publish", "service".
+#logging.selectors: ["*"]

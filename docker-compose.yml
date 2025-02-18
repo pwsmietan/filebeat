@@ -1,0 +1,16 @@
+version:  '2.4'
+
+services:
+  filebeat:
+    image: ${DOCKER_REGISTRY}filebeat{{digest}}
+    hostname: ${HOSTNAME}
+    labels:
+      - co.elastic.logs/disable
+    restart: always
+    user: root
+    userns_mode: host
+    volumes:
+      - "/var/lib/docker/500000.500000/containers:/var/lib/docker/containers:ro"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "/opt/volumes/filebeat/data:/usr/share/filebeat/data"
+      - "/opt/volumes/filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml"
