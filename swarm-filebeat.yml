@@ -6,7 +6,7 @@ filebeat.autodiscover:
       templates:
       - condition:
           equals:
-            docker.container.labels.com.coinstar.corp.khd: ""
+            docker.container.labels.com.scrubbed.corp.khd: ""
         config:
         - type: docker
           containers.ids: '*'
@@ -18,7 +18,7 @@ filebeat.autodiscover:
       - condition:
           not:
             equals:
-              docker.container.labels.com.coinstar.corp.khd: ""
+              docker.container.labels.com.scrubbed.corp.khd: ""
         config:
         - type: docker
           containers.ids: '*'
